@@ -63,38 +63,38 @@
 			<p>protobuf消息协议能够进一步减少消息体字节数, 从而提升系统运行效率; 接口明确定义字段, 是系统更加严谨可控.
 本文简单总结一下python操作protobuf的方法, 以供参考.</p>
 <h4 id="0x00-proto文件生成pb文件">0x00. proto文件生成pb文件</h4>
-<div class="highlight"><pre style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#000080"># proto目录下有a.proto, b.proto, c.proto, 在与proto同级目录生成pb文件</span>
-protoc -I<span style="color:#39c">=</span>. --python_out<span style="color:#39c">=</span>.. ./a.proto ./b.proto ./c.proto
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># proto目录下有a.proto, b.proto, c.proto, 在与proto同级目录生成pb文件</span>
+protoc -I<span style="color:#f92672">=</span>. --python_out<span style="color:#f92672">=</span>.. ./a.proto ./b.proto ./c.proto
 </code></pre></div><h4 id="0x01-读取数据文件加载到obj">0x01. 读取数据文件加载到obj</h4>
-<div class="highlight"><pre style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000080"># USAGE1: Merge</span>
-<span style="color:#cd00cd">from</span> google.protobuf <span style="color:#cd00cd">import</span> text_format
-<span style="color:#cd00cd">import</span> solution_pb2 <span style="color:#cd00cd">as</span> p
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># USAGE1: Merge</span>
+<span style="color:#f92672">from</span> google.protobuf <span style="color:#f92672">import</span> text_format
+<span style="color:#f92672">import</span> solution_pb2 <span style="color:#f92672">as</span> p
 
-solution <span style="color:#39c">=</span> p<span style="color:#39c">.</span>Solution()
-<span style="color:#cdcd00">with</span> <span style="color:#cd00cd">open</span>(<span style="color:#cd0000">&#39;data.prototxt&#39;</span>, <span style="color:#cd0000">&#39;rb&#39;</span>) <span style="color:#cdcd00">as</span> f:
-    text_format<span style="color:#39c">.</span>Merge(f<span style="color:#39c">.</span>read(), solution)
+solution <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>Solution()
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;data.prototxt&#39;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    text_format<span style="color:#f92672">.</span>Merge(f<span style="color:#f92672">.</span>read(), solution)
 </code></pre></div><h4 id="0x02-serializetostring和parsefromstring">0x02. SerializeToString和ParseFromString</h4>
-<div class="highlight"><pre style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000080"># USAGE2: bytes -&gt; ParseFromString, SerializeToString -&gt; bytes</span>
-solution2 <span style="color:#39c">=</span> p<span style="color:#39c">.</span>Solution()
-solution2<span style="color:#39c">.</span>ParseFromString(solution<span style="color:#39c">.</span>SerializeToString())
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># USAGE2: bytes -&gt; ParseFromString, SerializeToString -&gt; bytes</span>
+solution2 <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>Solution()
+solution2<span style="color:#f92672">.</span>ParseFromString(solution<span style="color:#f92672">.</span>SerializeToString())
 </code></pre></div><h4 id="0x03-repeated简单字段添加值">0x03. repeated简单字段添加值</h4>
-<div class="highlight"><pre style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000080"># USAGE3: append</span>
-module_cfg <span style="color:#39c">=</span> p<span style="color:#39c">.</span>ModuleCfg()
-module_cfg<span style="color:#39c">.</span>name <span style="color:#39c">=</span> <span style="color:#cd0000">&#34;classification&#34;</span>
-module_cfg<span style="color:#39c">.</span>type <span style="color:#39c">=</span> <span style="color:#cd0000">&#34;PytorchClassificationModel&#34;</span>
-module_cfg<span style="color:#39c">.</span>relyon_modules<span style="color:#39c">.</span>append(<span style="color:#cd0000">&#34;module-001&#34;</span>)
-module_cfg<span style="color:#39c">.</span>relyon_modules<span style="color:#39c">.</span>append(<span style="color:#cd0000">&#34;module-002&#34;</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># USAGE3: append</span>
+module_cfg <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>ModuleCfg()
+module_cfg<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;classification&#34;</span>
+module_cfg<span style="color:#f92672">.</span>type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;PytorchClassificationModel&#34;</span>
+module_cfg<span style="color:#f92672">.</span>relyon_modules<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;module-001&#34;</span>)
+module_cfg<span style="color:#f92672">.</span>relyon_modules<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;module-002&#34;</span>)
 </code></pre></div><h4 id="0x04-repeated自定义类型字段添加值">0x04. repeated自定义类型字段添加值</h4>
-<div class="highlight"><pre style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000080"># USAGE5: CopyFrom</span>
-solution<span style="color:#39c">.</span>modules<span style="color:#39c">.</span>add()<span style="color:#39c">.</span>CopyFrom(module_cfg)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># USAGE5: CopyFrom</span>
+solution<span style="color:#f92672">.</span>modules<span style="color:#f92672">.</span>add()<span style="color:#f92672">.</span>CopyFrom(module_cfg)
 </code></pre></div><h4 id="0x05-自定义类型字段赋值">0x05. 自定义类型字段赋值</h4>
-<div class="highlight"><pre style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000080"># USAGE4: add</span>
-service_cfg <span style="color:#39c">=</span> module_cfg<span style="color:#39c">.</span>services<span style="color:#39c">.</span>add()
-serv_data <span style="color:#39c">=</span> <span style="color:#cd0000">&#34;...&#34;</span>
-text_format<span style="color:#39c">.</span>Merge(serv_data, service_cfg)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># USAGE4: add</span>
+service_cfg <span style="color:#f92672">=</span> module_cfg<span style="color:#f92672">.</span>services<span style="color:#f92672">.</span>add()
+serv_data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;...&#34;</span>
+text_format<span style="color:#f92672">.</span>Merge(serv_data, service_cfg)
 </code></pre></div><h4 id="0x06-导出到文本">0x06. 导出到文本</h4>
-<div class="highlight"><pre style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000080"># USAGE6: MessageToString导出到文本(str)</span>
-cfg_content <span style="color:#39c">=</span> text_format<span style="color:#39c">.</span>MessageToString(solution)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># USAGE6: MessageToString导出到文本(str)</span>
+cfg_content <span style="color:#f92672">=</span> text_format<span style="color:#f92672">.</span>MessageToString(solution)
 </code></pre></div>
 		</div>
 		<footer class="post__footer">
