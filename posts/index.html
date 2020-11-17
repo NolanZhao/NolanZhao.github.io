@@ -11,7 +11,7 @@
 <meta property="og:description" content="rootcat&#39;s Personal blog about everything" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/posts/" />
-<meta property="og:updated_time" content="2020-11-17T10:58:16+08:00" />
+<meta property="og:updated_time" content="2020-11-17T17:11:37+08:00" />
 
 	<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
@@ -46,6 +46,32 @@
 	<header class="main__header">
 		<h1 class="main__title">Posts</h1>
 	</header><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/redis_master_slave_sentinel/" rel="bookmark">
+			Redis主从同步和哨兵
+			</a>
+		</h3>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-11-17T17:11:37">November 17, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/%e6%95%b0%e6%8d%ae%e5%ba%93" rel="category">数据库</a></span>
+</div>
+</div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Redis高可用解决方案: 主从同步+哨兵.
+&lt;! &ndash;more &ndash;&gt;
+1. 创建数据目录 cd /nfs_data/redis_data mkdir redis_9680 mkdir redis_9682 mkdir redis_9684 2. 修改配置文件 redis-conf修改
+port 6379 slaveof 172.24.29.118 9680 cluster-enabled no appendonly yes requirepass &lt;password&gt; masterauth &lt;password&gt; logfile &quot;/data/redis.log&quot; sentinel.conf修改
+daemonize yes port 27000 sentinel monitor mymaster 172.24.29.118 9680 2 sentinel down-after-milliseconds mymaster 5000 sentinel failover-timeout mymaster 900000 sentinel parallel-syncs mymaster 2 sentinel auth-pass mymaster &lt;password&gt; logfile &quot;/data/sentinel.log&quot; 3. 运行docker # Machine 1 docker run -p 9680:6379 -p 27000:27000 --name redis_9680 --restart always --mount type=bind,src=/nfs_data/redis_data/redis_9680,dst=/data -d redis redis-server /data/redis.
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/posts/mongo_replica_set/" rel="bookmark">
@@ -203,11 +229,11 @@ H[1][3]的值代表下移尺度</p>
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/redis_master_slave_sentinel/">Redis主从同步和哨兵</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/mongo_replica_set/">使用docker构建mongo Replica Set</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/protobuf-tutorial/">Protobuf简明指南</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/graph_topolgical_sort/">图的拓扑排序和判断是否有环</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/image-watermark/">图片水印：光晕效果</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/image-transform/">图像平移矩阵</a></li>
 		</ul>
 	</div>
 </div>
@@ -228,6 +254,7 @@ H[1][3]的值代表下移尺度</p>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/mongodb" title="Mongodb">Mongodb</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/protobuf" title="Protobuf">Protobuf</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/redis" title="Redis">Redis</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/replset" title="Replset">Replset</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%9b%be%e5%83%8f%e5%b9%b3%e7%a7%bb" title="图像平移">图像平移</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%9b%be%e5%83%8f%e6%8b%bc%e6%8e%a5" title="图像拼接">图像拼接</a>

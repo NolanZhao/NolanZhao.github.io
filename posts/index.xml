@@ -6,10 +6,23 @@
     <description>Recent content in Posts on 云端漫步</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Nov 2020 10:58:16 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2020 17:11:37 +0800</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Redis主从同步和哨兵</title>
+      <link>/posts/redis_master_slave_sentinel/</link>
+      <pubDate>Tue, 17 Nov 2020 17:11:37 +0800</pubDate>
+      
+      <guid>/posts/redis_master_slave_sentinel/</guid>
+      <description>Redis高可用解决方案: 主从同步+哨兵.
+&amp;lt;! &amp;ndash;more &amp;ndash;&amp;gt;
+1. 创建数据目录 cd /nfs_data/redis_data mkdir redis_9680 mkdir redis_9682 mkdir redis_9684 2. 修改配置文件 redis-conf修改
+port 6379 slaveof 172.24.29.118 9680 cluster-enabled no appendonly yes requirepass &amp;lt;password&amp;gt; masterauth &amp;lt;password&amp;gt; logfile &amp;quot;/data/redis.log&amp;quot; sentinel.conf修改
+daemonize yes port 27000 sentinel monitor mymaster 172.24.29.118 9680 2 sentinel down-after-milliseconds mymaster 5000 sentinel failover-timeout mymaster 900000 sentinel parallel-syncs mymaster 2 sentinel auth-pass mymaster &amp;lt;password&amp;gt; logfile &amp;quot;/data/sentinel.log&amp;quot; 3. 运行docker # Machine 1 docker run -p 9680:6379 -p 27000:27000 --name redis_9680 --restart always --mount type=bind,src=/nfs_data/redis_data/redis_9680,dst=/data -d redis redis-server /data/redis.</description>
+    </item>
     
     <item>
       <title>使用docker构建mongo Replica Set</title>

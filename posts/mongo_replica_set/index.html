@@ -72,8 +72,7 @@ mkdir mongo_9690
 mkdir mongo_9692
 mkdir mongo_9694
 </code></pre></div><h2 id="3-生成keyfile">3. 生成keyfile</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 注: 这里多台机器能都访问/nfs_data目录. 若没有/nfs_data目录可以scp拷贝到其他机器</span>
-cd /nfs_data
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /nfs_data
 openssl rand -base64 <span style="color:#ae81ff">756</span> &gt; keyfile
 chmod <span style="color:#ae81ff">400</span> keyfile
 cp keyfile mongo_9690
@@ -87,11 +86,8 @@ docker run -p 9690:27017 --restart always -v /nfs_data/mongo_9690:/data --name m
 docker run -p 9692:27017 --restart always -v /nfs_data/mongo_9692:/data --name mongo_9692 -d mongo mongod --bind_ip_all --replSet rs1
 <span style="color:#75715e"># AI04</span>
 docker run -p 9694:27017 --restart always -v /nfs_data/mongo_9694:/data --name mongo_9694 -d mongo mongod --bind_ip_all --replSet rs1
-<span style="color:#e6db74">```</span>bash
-
-<span style="color:#75715e">## 5. 修改keyfile的用户为mongodb(在docker里)</span>
-<span style="color:#e6db74">```</span>bash
-<span style="color:#75715e"># AI02</span>
+</code></pre></div><h2 id="5-修改keyfile的用户为mongodb在docker里">5. 修改keyfile的用户为mongodb(在docker里)</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># AI02</span>
 docker exec -it mongo_9690 /bin/bash
 cd data
 chown mongodb:mongodb keyfile
@@ -185,6 +181,9 @@ docker exec -it mongo_9690 mongorestore --username nolan --password <span style=
 	<div class="post-nav__item post-nav__item--prev">
 		<a class="post-nav__link" href="/posts/protobuf-tutorial/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Protobuf简明指南</p></a>
 	</div>
+	<div class="post-nav__item post-nav__item--next">
+		<a class="post-nav__link" href="/posts/redis_master_slave_sentinel/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Redis主从同步和哨兵</p></a>
+	</div>
 </nav>
 
 
@@ -202,11 +201,11 @@ docker exec -it mongo_9690 mongorestore --username nolan --password <span style=
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/redis_master_slave_sentinel/">Redis主从同步和哨兵</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/mongo_replica_set/">使用docker构建mongo Replica Set</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/protobuf-tutorial/">Protobuf简明指南</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/graph_topolgical_sort/">图的拓扑排序和判断是否有环</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/image-watermark/">图片水印：光晕效果</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/image-transform/">图像平移矩阵</a></li>
 		</ul>
 	</div>
 </div>
@@ -227,6 +226,7 @@ docker exec -it mongo_9690 mongorestore --username nolan --password <span style=
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/mongodb" title="Mongodb">Mongodb</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/protobuf" title="Protobuf">Protobuf</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/redis" title="Redis">Redis</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/replset" title="Replset">Replset</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%9b%be%e5%83%8f%e5%b9%b3%e7%a7%bb" title="图像平移">图像平移</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%e5%9b%be%e5%83%8f%e6%8b%bc%e6%8e%a5" title="图像拼接">图像拼接</a>
