@@ -8,10 +8,7 @@
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<meta property="og:title" content="Redis主从同步和哨兵" />
-<meta property="og:description" content="Redis高可用解决方案: 主从同步&#43;哨兵.
-1. 创建数据目录 cd /nfs_data/redis_data mkdir redis_9680 mkdir redis_9682 mkdir redis_9684 2. 修改配置文件 redis-conf修改
-port 6379 slaveof 172.24.29.118 9680 cluster-enabled no appendonly yes requirepass &lt;password&gt; masterauth &lt;password&gt; logfile &#34;/data/redis.log&#34; sentinel.conf修改
-daemonize yes port 27000 sentinel monitor mymaster 172.24.29.118 9680 2 sentinel down-after-milliseconds mymaster 5000 sentinel failover-timeout mymaster 900000 sentinel parallel-syncs mymaster 2 sentinel auth-pass mymaster &lt;password&gt; logfile &#34;/data/sentinel.log&#34; 3. 运行docker # Machine 1 docker run -p 9680:6379 -p 27000:27000 --name redis_9680 --restart always --mount type=bind,src=/nfs_data/redis_data/redis_9680,dst=/data -d redis redis-server /data/redis." />
+<meta property="og:description" content="Redis高可用解决方案: 主从同步&#43;哨兵." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/redis_master_slave_sentinel/" />
 <meta property="article:published_time" content="2020-11-17T17:11:37+08:00" />
@@ -19,10 +16,7 @@ daemonize yes port 27000 sentinel monitor mymaster 172.24.29.118 9680 2 sentinel
 
 	<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Redis主从同步和哨兵"/>
-<meta name="twitter:description" content="Redis高可用解决方案: 主从同步&#43;哨兵.
-1. 创建数据目录 cd /nfs_data/redis_data mkdir redis_9680 mkdir redis_9682 mkdir redis_9684 2. 修改配置文件 redis-conf修改
-port 6379 slaveof 172.24.29.118 9680 cluster-enabled no appendonly yes requirepass &lt;password&gt; masterauth &lt;password&gt; logfile &#34;/data/redis.log&#34; sentinel.conf修改
-daemonize yes port 27000 sentinel monitor mymaster 172.24.29.118 9680 2 sentinel down-after-milliseconds mymaster 5000 sentinel failover-timeout mymaster 900000 sentinel parallel-syncs mymaster 2 sentinel auth-pass mymaster &lt;password&gt; logfile &#34;/data/sentinel.log&#34; 3. 运行docker # Machine 1 docker run -p 9680:6379 -p 27000:27000 --name redis_9680 --restart always --mount type=bind,src=/nfs_data/redis_data/redis_9680,dst=/data -d redis redis-server /data/redis."/>
+<meta name="twitter:description" content="Redis高可用解决方案: 主从同步&#43;哨兵."/>
 
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -65,7 +59,6 @@ daemonize yes port 27000 sentinel monitor mymaster 172.24.29.118 9680 2 sentinel
 </div>
 		</header><div class="content post__content clearfix">
 			<p>Redis高可用解决方案: 主从同步+哨兵.</p>
-<!-- raw HTML omitted -->
 <h2 id="1-创建数据目录">1. 创建数据目录</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /nfs_data/redis_data
 mkdir redis_9680

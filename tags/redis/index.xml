@@ -17,10 +17,7 @@
       <pubDate>Tue, 17 Nov 2020 17:11:37 +0800</pubDate>
       
       <guid>/posts/redis_master_slave_sentinel/</guid>
-      <description>Redis高可用解决方案: 主从同步+哨兵.
-1. 创建数据目录 cd /nfs_data/redis_data mkdir redis_9680 mkdir redis_9682 mkdir redis_9684 2. 修改配置文件 redis-conf修改
-port 6379 slaveof 172.24.29.118 9680 cluster-enabled no appendonly yes requirepass &amp;lt;password&amp;gt; masterauth &amp;lt;password&amp;gt; logfile &amp;#34;/data/redis.log&amp;#34; sentinel.conf修改
-daemonize yes port 27000 sentinel monitor mymaster 172.24.29.118 9680 2 sentinel down-after-milliseconds mymaster 5000 sentinel failover-timeout mymaster 900000 sentinel parallel-syncs mymaster 2 sentinel auth-pass mymaster &amp;lt;password&amp;gt; logfile &amp;#34;/data/sentinel.log&amp;#34; 3. 运行docker # Machine 1 docker run -p 9680:6379 -p 27000:27000 --name redis_9680 --restart always --mount type=bind,src=/nfs_data/redis_data/redis_9680,dst=/data -d redis redis-server /data/redis.</description>
+      <description>&lt;p&gt;Redis高可用解决方案: 主从同步+哨兵.&lt;/p&gt;</description>
     </item>
     
   </channel>
